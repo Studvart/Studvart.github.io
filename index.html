@@ -23,12 +23,36 @@
         }
         .banner {
             background-color: #333333;
-            padding: 10px 0;
-            text-align: center;
+            text-align: left;
+            padding: 10px;
+            position: fixed;
+            width: 200px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner img {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+        }
+        .banner a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .banner a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            margin-left: 220px; /* Adjust this value to give space for the banner */
         }
         .banner h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 20px;
         }
         nav ul {
             list-style-type: none;
@@ -56,25 +80,31 @@
 <body>
 
 <div class="banner">
-    <h1>My Code Portfolio</h1>
-    <nav>
-        <ul>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
-    </nav>
+    <img src="your_image_url_here" alt="Your Name">
+    <h1>Your Name</h1>
+    <a href="https://www.linkedin.com/in/studvart" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Studvart" target="_blank">GitHub</a>
 </div>
 
-<div class="container">
-    <div class="header">
-        <p>Welcome to my code portfolio showcasing my projects and work.</p>
+<div class="main-content">
+    <div class="container">
+        <div class="header">
+            <p>Welcome to my code portfolio showcasing my projects and work.</p>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
     </div>
-</div>
 
-<footer>
-    <p>&copy; 2024 My Code Portfolio. All rights reserved.</p>
-</footer>
+    <footer>
+        <p>&copy; 2024 My Code Portfolio. All rights reserved.</p>
+    </footer>
+</div>
 
 </body>
 </html>
