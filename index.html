@@ -1,110 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Code Portfolio</title>
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .banner {
-            background-color: #333333;
-            text-align: left;
-            padding: 10px;
-            position: fixed;
-            width: 200px;
-            height: 100%;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .banner img {
-            width: 150px;
-            height: auto;
-            border-radius: 50%;
-        }
-        .banner a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        .banner a:hover {
-            text-decoration: underline;
-        }
-        .main-content {
-            margin-left: 220px; /* Adjust this value to give space for the banner */
-        }
-        .banner h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            border-bottom: 2px solid #ffffff;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Professional portfolio for Studvart: selected projects, technical skills, studies, and work-related experience." />
+  <title>Studvart | Professional Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-light: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(148, 163, 184, 0.25);
+      --shadow: 0 24px 60px rgba(2, 6, 23, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 32%), var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.86);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      font-size: 1.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 24px 36px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 32px;
+      align-items: center;
+      min-height: 68vh;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5.3rem);
+      max-width: 820px;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 720px;
+      margin: 24px 0 32px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #082f49;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(248, 250, 252, 0.55);
+    }
+
+    .profile-card {
+      background: linear-gradient(180deg, rgba(31, 41, 55, 0.92), rgba(17, 24, 39, 0.92));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #082f49;
+      font-weight: 900;
+      font-size: 2rem;
+      margin-bottom: 22px;
+    }
+
+    .meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+      color: var(--muted);
+    }
+
+    .meta-list li {
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 0 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 100%;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(15, 23, 42, 0.72);
+    }
+
+    .date {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(34, 197, 94, 0.12));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 32px 24px 48px;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero,
+      .grid,
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding-top: 48px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top">Studvart</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#studies">Studies</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-<div class="banner">
-    <img src="your_image_url_here" alt="Your Name">
-    <h1>Your Name</h1>
-    <a href="https://www.linkedin.com/in/studvart" target="_blank">LinkedIn</a>
-    <a href="https://github.com/Studvart" target="_blank">GitHub</a>
-</div>
-
-<div class="main-content">
-    <div class="container">
-        <div class="header">
-            <p>Welcome to my code portfolio showcasing my projects and work.</p>
+  <main id="top" class="page">
+    <section class="hero" aria-label="Introduction">
+      <div>
+        <p class="eyebrow">Portfolio · Projects · Professional Profile</p>
+        <h1>Building practical digital projects with a focus on clear, reliable outcomes.</h1>
+        <p class="lead">
+          I use this site to showcase selected personal work, studies, and work-related projects for future employment opportunities. Replace this paragraph with a concise summary of your role, technical interests, and the type of positions you are targeting.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#projects">View projects</a>
+          <a class="button" href="https://github.com/Studvart" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="button" href="https://www.linkedin.com/in/studvart" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
+      </div>
 
-        <nav>
-            <ul>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </div>
+      <aside class="profile-card" aria-label="Profile summary">
+        <div class="avatar" aria-hidden="true">S</div>
+        <h2>Studvart</h2>
+        <p class="section-intro">
+          Developer / technical professional. Add your location, job title, degree, or professional focus here.
+        </p>
+        <ul class="meta-list">
+          <li><strong>Focus:</strong> Software, web, data, automation</li>
+          <li><strong>Open to:</strong> Employment, internships, project work</li>
+          <li><strong>Links:</strong> GitHub · LinkedIn · CV available on request</li>
+        </ul>
+      </aside>
+    </section>
 
-    <footer>
-        <p>&copy; 2024 My Code Portfolio. All rights reserved.</p>
-    </footer>
-</div>
+    <section id="about">
+      <p class="eyebrow">About</p>
+      <h2>Professional summary</h2>
+      <p class="section-intro">
+        Write a short, evidence-based introduction here: what you are studying or working on, which technologies you use, and what kinds of problems you enjoy solving. Keep it specific and employer-facing.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Technical approach</h3>
+          <p>Clear requirements, maintainable code, documented decisions, and practical delivery.</p>
+        </article>
+        <article class="card">
+          <h3>Core interests</h3>
+          <p>Web development, software engineering, data analysis, process automation, and applied problem solving.</p>
+        </article>
+        <article class="card">
+          <h3>Professional value</h3>
+          <p>Translating project needs into working tools, readable documentation, and measurable improvements.</p>
+        </article>
+      </div>
+    </section>
 
+    <section id="projects">
+      <p class="eyebrow">Selected work</p>
+      <h2>Projects to showcase</h2>
+      <p class="section-intro">
+        Replace these example cards with your strongest projects. Use each card to explain the problem, your contribution, the tools used, and the result.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Personal portfolio website</h3>
+          <p>A GitHub Pages site presenting professional background, project evidence, and employment-focused contact links.</p>
+          <div class="tag-list">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">GitHub Pages</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Study project title</h3>
+          <p>Describe a coursework, research, or self-directed project. Include the objective, method, and what you learned.</p>
+          <div class="tag-list">
+            <span class="tag">Research</span><span class="tag">Analysis</span><span class="tag">Documentation</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Work-related project</h3>
+          <p>Summarise a professional project without exposing confidential information. Focus on your role, process, and business impact.</p>
+          <div class="tag-list">
+            <span class="tag">Process</span><span class="tag">Delivery</span><span class="tag">Impact</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <p class="eyebrow">Experience</p>
+      <h2>Work-related projects</h2>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="date">Recent</div>
+          <div>
+            <h3>Project or role title</h3>
+            <p class="section-intro">Briefly describe the business context, what you personally delivered, and the outcome. Avoid naming employers or clients if the work is confidential.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="date">Previous</div>
+          <div>
+            <h3>Operational improvement / technical contribution</h3>
+            <p class="section-intro">Use this space for systems improved, reports built, automations created, processes documented, or stakeholder problems solved.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="studies">
+      <p class="eyebrow">Studies</p>
+      <h2>Learning and development</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Academic or training area</h3>
+          <p>Add your course, degree, certification, or independent study topic.</p>
+        </article>
+        <article class="card">
+          <h3>Technical skills</h3>
+          <p>List the technologies you want employers to associate with you.</p>
+        </article>
+        <article class="card">
+          <h3>Current goals</h3>
+          <p>Explain what you are learning next and how it supports your career direction.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-box">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Interested in working together?</h2>
+          <p class="section-intro">Use the links below to review my work or contact me about employment opportunities.</p>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="https://www.linkedin.com/in/studvart" target="_blank" rel="noopener noreferrer">Contact on LinkedIn</a>
+          <a class="button" href="https://github.com/Studvart" target="_blank" rel="noopener noreferrer">View GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Studvart. Built with HTML and CSS for GitHub Pages.</p>
+  </footer>
 </body>
 </html>

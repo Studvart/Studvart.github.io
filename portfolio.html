@@ -1,80 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .banner {
-            background-color: #333333;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .banner h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            border-bottom: 2px solid #ffffff;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Selected academic, technical, and work-related projects across machine learning, ethics, data science, visualisation, network systems, and applied delivery." />
+  <title>Portfolio | Studvart</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-light: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --border: rgba(148, 163, 184, 0.25);
+      --shadow: 0 24px 60px rgba(2, 6, 23, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 32%), var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      font-size: 1.15rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 24px 36px;
+    }
+
+    .hero {
+      padding: 36px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.04em; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); max-width: 900px; }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); margin-bottom: 16px; }
+    h3 { font-size: 1.2rem; margin-bottom: 10px; }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.24rem);
+      max-width: 820px;
+      margin: 24px 0 0;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .summary-card,
+    .project-card,
+    .note-card {
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    .summary-card span,
+    .project-card p,
+    .note-card p,
+    .project-card li { color: var(--muted); }
+
+    section {
+      padding: 68px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 780px;
+      margin: 0 0 28px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .project-card header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .project-card ul {
+      padding-left: 20px;
+      margin: 12px 0 16px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    .skill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .note-card {
+      box-shadow: none;
+      border-left: 4px solid var(--accent-2);
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 820px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .summary-grid, .project-grid { grid-template-columns: 1fr; }
+      main { padding-top: 44px; }
+    }
+  </style>
 </head>
 <body>
-
-<div class="banner">
-    <h1>My Code Portfolio</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Me</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html">Studvart</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="portfolio.html">Portfolio</a>
+        <a href="blog.html">Blog</a>
+        <a href="https://github.com/Studvart" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/studvart" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </nav>
-</div>
+  </header>
 
-<div class="container">
-    <div class="header">
-        <p>Portfolio content goes here.</p>
-    </div>
-</div>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Selected work</p>
+      <h1>Academic, technical, and applied projects across data, systems, ethics, and visualisation.</h1>
+      <p class="lead">
+        This portfolio brings together work from my studies and applied technical practice. My focus is on learning by building: using programming, analysis, documentation, and critical evaluation to turn complex topics into clear, practical outputs.
+      </p>
 
-<footer>
-    <p>&copy; 2024 My Code Portfolio. All rights reserved.</p>
-</footer>
+      <div class="summary-grid" aria-label="Portfolio summary">
+        <div class="summary-card">
+          <strong>6</strong>
+          <span>Project areas presented</span>
+        </div>
+        <div class="summary-card">
+          <strong>Data</strong>
+          <span>Machine learning, maths, and visual analytics</span>
+        </div>
+        <div class="summary-card">
+          <strong>Systems</strong>
+          <span>Networks, delivery, and professional documentation</span>
+        </div>
+      </div>
+    </section>
 
+    <section>
+      <h2>Project areas</h2>
+      <p class="section-intro">
+        The entries below are written as concise case-study summaries. They are intended to help future employers understand the type of work I have studied, the tools I have used, and the professional skills I am developing.
+      </p>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <header>
+            <h3>Machine Learning</h3>
+            <span class="tag">Data modelling</span>
+          </header>
+          <p>
+            I explored how machine learning methods can be used to identify patterns, make predictions, and evaluate model performance. This work helped me connect theoretical concepts with practical implementation and interpretation.
+          </p>
+          <ul>
+            <li>Prepared data for analysis, including cleaning, feature selection, and basic exploratory review.</li>
+            <li>Worked with supervised learning concepts such as classification, regression, training, testing, and validation.</li>
+            <li>Considered model performance using metrics and reflected on overfitting, bias, and generalisation.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Python</span>
+            <span class="skill">Data preparation</span>
+            <span class="skill">Model evaluation</span>
+            <span class="skill">Critical interpretation</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <header>
+            <h3>Ethics</h3>
+            <span class="tag">Responsible technology</span>
+          </header>
+          <p>
+            I examined the ethical implications of technology and data-driven systems, particularly where automated decisions may affect people, organisations, or society. This work strengthened my ability to evaluate systems beyond technical performance alone.
+          </p>
+          <ul>
+            <li>Analysed issues such as privacy, fairness, accountability, explainability, and responsible use of data.</li>
+            <li>Considered how technical decisions can create social, legal, and professional consequences.</li>
+            <li>Practised writing structured arguments and recommendations for ethical technology use.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Technology ethics</span>
+            <span class="skill">Risk awareness</span>
+            <span class="skill">Governance</span>
+            <span class="skill">Professional writing</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <header>
+            <h3>Maths &amp; Data Science</h3>
+            <span class="tag">Analytical foundations</span>
+          </header>
+          <p>
+            This work developed my understanding of the mathematical foundations behind data science. I focused on using quantitative reasoning to support analysis, communicate findings, and make better technical decisions.
+          </p>
+          <ul>
+            <li>Applied statistical thinking to understand distributions, relationships, uncertainty, and trends.</li>
+            <li>Used mathematical methods to support data analysis and evidence-based conclusions.</li>
+            <li>Built confidence in interpreting results rather than treating outputs as black boxes.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Statistics</span>
+            <span class="skill">Data analysis</span>
+            <span class="skill">Quantitative reasoning</span>
+            <span class="skill">Evidence-based thinking</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <header>
+            <h3>Visualisation Unit</h3>
+            <span class="tag">Data communication</span>
+          </header>
+          <p>
+            I studied how visualisation can make data easier to understand, compare, and explain. This area helped me think about audience, clarity, design choices, and how to avoid misleading presentation.
+          </p>
+          <ul>
+            <li>Designed visual outputs to communicate patterns, comparisons, and insights from data.</li>
+            <li>Considered chart selection, layout, hierarchy, accessibility, and narrative structure.</li>
+            <li>Focused on making technical findings understandable to non-specialist audiences.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Data visualisation</span>
+            <span class="skill">User communication</span>
+            <span class="skill">Dashboard thinking</span>
+            <span class="skill">Insight presentation</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <header>
+            <h3>Zally</h3>
+            <span class="tag">Applied project</span>
+          </header>
+          <p>
+            Zally represents an applied project area where I can demonstrate practical delivery: understanding requirements, organising work, documenting progress, and presenting outcomes in a clear professional format.
+          </p>
+          <ul>
+            <li>Used the project as an opportunity to practise structured development and problem solving.</li>
+            <li>Focused on communicating purpose, scope, decisions, and next steps clearly.</li>
+            <li>Developed material that can be explained to both technical and non-technical stakeholders.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Project delivery</span>
+            <span class="skill">Documentation</span>
+            <span class="skill">Problem solving</span>
+            <span class="skill">Stakeholder communication</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <header>
+            <h3>Networks</h3>
+            <span class="tag">Infrastructure concepts</span>
+          </header>
+          <p>
+            My networks work developed my understanding of how systems communicate, how infrastructure is structured, and why reliability, security, and troubleshooting are important in real-world environments.
+          </p>
+          <ul>
+            <li>Studied networking concepts including protocols, addressing, connectivity, and layered architecture.</li>
+            <li>Considered how network design choices affect performance, resilience, and security.</li>
+            <li>Practised explaining technical infrastructure concepts in a clear and structured way.</li>
+          </ul>
+          <div class="skills">
+            <span class="skill">Networking fundamentals</span>
+            <span class="skill">Troubleshooting</span>
+            <span class="skill">Security awareness</span>
+            <span class="skill">Technical explanation</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>How I approach technical work</h2>
+      <div class="note-card">
+        <p>
+          Across these projects, I try to show more than final outputs. I aim to document the problem, explain the approach, justify decisions, and reflect on what could be improved. For future employment, this portfolio is designed to demonstrate learning, professionalism, communication, and the ability to connect technical detail with practical value.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Studvart. Portfolio content prepared for academic, professional, and employment-facing review.</p>
+  </footer>
 </body>
 </html>
