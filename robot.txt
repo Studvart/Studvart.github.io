@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /
+
+Allow: /index.html
+Allow: /about.html
+Allow: /portfolio.html
+Allow: /blog.html
+
+Sitemap: https://studvart.github.io/sitemap.xml

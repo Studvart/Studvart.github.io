@@ -1,6 +1,6 @@
 # Studvart Portfolio Site
 
-Option A implementation: plain HTML, shared CSS, and shared JavaScript.
+Plain HTML, shared CSS and shared JavaScript.
 
 Upload all files and folders to the root of the `Studvart.github.io` repository.
 
@@ -13,32 +13,33 @@ Upload all files and folders to the root of the `Studvart.github.io` repository.
 
 ```text
 /
-├── index.html
-├── about.html
-├── portfolio.html
-├── blog.html
-├── contact.html
+├── .github/
+├── .vscode/
 ├── assets/
 │   ├── css/
 │   │   └── styles.css
-│   ├── js/
-│   │   └── script.js
+│   ├── docs/
+│   │   └── CV.pdf
 │   ├── images/
-│   │   ├── profile.jpg
-│   │   ├── project-1.png
-│   │   ├── project-2.png
-│   │   └── favicon.ico
-│   └── docs/
-│       └── CV.pdf
+│   │   ├── .jpg
+│   │   ├── .png
+│   │   └── .ico
+│   └── js/
+│       └── script.js
+├── blog/
+│   ├── first-post.html
+│   └── ml-notes.html
 ├── projects/
 │   ├── ml-project.html
 │   ├── networks-project.html
 │   └── ethics-project.html
-├── blog/
-│   ├── first-post.html
-│   └── ml-notes.html
 ├── 404.html
+├── about.html
+├── blog.html
+├── contact.html
+├── index.html
+├── portfolio.html
+├── README.md
 ├── robots.txt
-├── sitemap.xml
-└── README.md
+└── sitemap.xml
 ```
