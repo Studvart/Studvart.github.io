@@ -40,6 +40,7 @@ function computeWeightedUnitScores(rows) {
   rows.forEach((row) => {
     const level = toNumber(row.Level);
     const subject = typeof row.Subject === 'string' ? row.Subject.trim() : '';
+    const project = typeof row.Project === 'string' ? row.Project.trim() : '';
     const weight = toNumber(row.Weight);
     const score = toNumber(row.Score);
 
@@ -50,6 +51,7 @@ function computeWeightedUnitScores(rows) {
       grouped.set(key, {
         level: Number.isFinite(level) ? level : '-',
         subject,
+        isGroup: false,
         weightedTotal: 0,
         assessedWeight: 0,
         totalWeight: 0,
@@ -65,6 +67,11 @@ function computeWeightedUnitScores(rows) {
       unit.weightedTotal += score * weight;
       unit.assessedWeight += weight;
     }
+
+    // detect group project by examining the Project description
+    if (project && /\bgroup\b/i.test(project)) {
+      unit.isGroup = true;
+    }
   });
 
   return Array.from(grouped.values())
@@ -77,6 +84,7 @@ function computeWeightedUnitScores(rows) {
         weightedScore,
         assessedCoverage,
         assessmentStatus: getAssessmentStatus(unit),
+        isGroup: unit.isGroup || false,
       };
     })
     .sort((a, b) => {
@@ -100,7 +108,7 @@ function populateScoreTable(scoreBody, unitScores) {
 
     tr.innerHTML = `
       <td>${unit.level}</td>
-      <td>${escapeHtml(unit.subject)}</td>
+      <td>${escapeHtml(unit.subject)}${unit.isGroup ? ' <span class="unit-badge">Group</span>' : ''}</td>
       <td>${formatScore(unit.weightedScore)}</td>
       <td>${escapeHtml(unit.assessmentStatus)}</td>
     `;
